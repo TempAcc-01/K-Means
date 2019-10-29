@@ -1,0 +1,44 @@
+This K-means program has multiple files:
+-kmapper.py (a mapper)
+-kcombiner.py (a combiner)
+-kreducer.py (a reducer)
+-prepend.py (a method to prepend data centers to data)
+-exe.sh (bash executable using Hadoop Stream)
+-execat.sh (bash executable using cat)
+-3D_spatial_network.txt (a dataset)
+
+The kmapper can be modified for the number of k-clusters to find.
+To change the number of clusters, change line: 
+"k=??" (Currently set to 5)
+No other modifications are necessary.  The program is dynamic enough to calculate centers for any number of attributes.  The current dataset has 3.
+The program makes the assumption that the leftmost column is a label.
+
+The kcombiner and kreducer simply sum and calculate the average for the clusters.  No modifications are necessary.
+
+prepend takes two arguments to execute:
+"$./prepend.py file1 file2"
+The program then takes the data from file2 and adds it to the beginning of file1.  The program works for the specific output of these files, and will need to be modified if changes are made to combiner and reducer.
+
+exe.sh and execat.sh are bash executables for these files.
+The current dataset is "3D_spatial_network.txt" but can be replaced by any other data file.  Simply replace instances of "3D_spatial_network.txt" with the desired dataset.
+
+===================
+
+Execution of exe.sh file:
+
+1) Put all files in same directory
+2) Start hadoop
+3) From linux command line: $./exe.sh
+4) When prompted enter number of iterations to perform
+5) Program will produce a file called centers?.txt after every iteration. 
+6) The final file will simply be called centers.txt
+
+Execution of execat.sh file:
+
+1) Put all files in same directory
+2) From linux command line: $./execat.sh
+3) When prompted enter number of iterations to perform
+4) Program will create a new director called output
+5) Program will produce a file called centers?.txt after every iteration in /output
+6) The final file will simply be called centers.txt in /output
+
